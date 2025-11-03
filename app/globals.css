@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --radius: 0.625rem;
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+/* public/pattern.png sería tu imagen */
+
+.gradient-pattern-background {
+  /* Primera capa: La imagen repetida */
+  /* background-image: url('/bg.webp'); */
+  /* Asegúrate de que la ruta sea correcta */
+  background-repeat: no-repeat;
+  /* Para que se repita */
+  /* background-size: 100px 100px; */
+  /* Tamaño de cada repetición de la imagen (ajusta según necesites) */
+  /* background-attachment: fixed; */
+  /* Opcional: para que el fondo no se mueva con el scroll */
+
+  /* Segunda capa: El gradiente de colores específicos */
+  /* Puedes usar linear-gradient o radial-gradient. Aquí un ejemplo linear. */
+  /* Los valores son (dirección, color1 porcentaje, color2 porcentaje, etc.) */
+  background-image: linear-gradient(to bottom right,
+      /* Dirección del gradiente */
+      #ff6b6b 0%,
+      /* Rojo suave */
+      #ffe66d 50%,
+      /* Amarillo brillante */
+      #4ecdc4 100%
+      /* Turquesa */
+    ), url('/bg_dos.png');
+  /* Repetimos la imagen aquí para que quede debajo del gradiente */
+
+  /* Combinación de background-size y background-blend-mode para controlar cómo se mezclan */
+  /* El background-image acepta múltiples valores, separados por comas */
+  /* El background-size también puede tener múltiples valores */
+  background-size:
+    cover;
+
+    background-position: center;
+
+  /* background-blend-mode: Te permite mezclar las capas de fondo */
+  /* Prueba con "overlay", "multiply", "screen", "soft-light" etc. para ver el efecto */
+  background-blend-mode: lighten;
+
+  /* Opcional: Color de fondo de respaldo si algo falla */
+  /* background-color: #f0f0f0; */
+
+  /* Asegúrate de que el elemento tenga altura y anchura para ver el fondo */
+  /* min-height: 100vh; */
+  /* Para ocupar toda la altura de la ventana */
+  width: 100%;
+}
+
+/* Opcional: Un gradiente más simple si solo quieres que la imagen se "tiña" */
+.gradient-pattern-background-simple {
+  background-image:
+    url('/pattern.png'),
+    /* La imagen repetida */
+    linear-gradient(to bottom right,
+      #ff6b6b 0%,
+      #ffe66d 50%,
+      #4ecdc4 100%);
+  background-size: 100px 100px, cover;
+  /* Tamaño de la imagen, tamaño del gradiente */
+  background-repeat: repeat, no-repeat;
+  /* La imagen se repite, el gradiente no */
+  background-attachment: fixed, fixed;
+  background-blend-mode: multiply;
+  /* O experimenta con 'overlay', 'screen', etc. */
+  min-height: 100vh;
+  width: 100%;
+}
