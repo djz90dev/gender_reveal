@@ -76,7 +76,7 @@ export default function RevealScreen({ gender, predictions }: RevealScreenProps)
   return (
     <div
       className={`min-h-screen flex items-center justify-center p-4 ${
-        gender === "boy" ? "bg-gradient-to-br from-blue-300 to-cyan-300" : "bg-gradient-to-br from-pink-300 to-rose-300"
+        gender === "boy" ? "bg-[#c7e7e6]" : "bg-[#f9c8b9]"
       }`}
     >
       <style>{`
@@ -101,12 +101,13 @@ export default function RevealScreen({ gender, predictions }: RevealScreenProps)
         <div className="text-9xl mb-6 animate-pulse-scale">{gender === "boy" ? "👦" : "👧"}</div>
 
         {/* Título */}
-        <h1 className={`text-5xl sm:text-6xl font-bold mb-4 ${gender === "boy" ? "text-blue-600" : "text-pink-600"}`}>
+        <h1 className={`text-2xl sm:text-6xl font-bold mb-4 ${gender === "boy" ? "text-[#c7e7e6]" : "text-[#f9c8b9]"} contorno-blanco`}>
           {gender === "boy" ? "¡Es un NIÑO!" : "¡Es una NIÑA!"}
         </h1>
 
         {/* Subtítulo */}
-        <p className="text-xl text-gray-600 mb-8">¡Felicidades por tu bebé! 🎉</p>
+        <h2 className="text-6xl text-gray-600 mb-8 nombre">{gender === "boy" ? "Ethan Sebastian Zurita Segovía" : "Liah Charlotte Zurita Segovía"}</h2>
+        <p className="text-2xl text-gray-600 mb-8">¡Felicidades! 🎉</p>
 
         {/* Estadísticas de aciertos */}
         <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-6 rounded-lg mb-8">
@@ -117,7 +118,7 @@ export default function RevealScreen({ gender, predictions }: RevealScreenProps)
 
           {correctGuesses.length > 0 && (
             <div className="space-y-2 mt-4">
-              <p className="text-sm font-semibold text-gray-700 mb-2">Ganadores:</p>
+              {/* <p className="text-sm font-semibold text-gray-700 mb-2">Ganadores:</p> */}
               {correctGuesses.map((guess) => (
                 <div key={guess.id} className="bg-white rounded px-3 py-2 inline-block mr-2 mb-2">
                   <span className="font-semibold text-gray-800">{guess.name}</span>
@@ -167,7 +168,7 @@ export default function RevealScreen({ gender, predictions }: RevealScreenProps)
         )}
 
         {/* Botones de acción */}
-        <div className="flex flex-col sm:flex-row gap-4">
+        {/* <div className="flex flex-col sm:flex-row gap-4">
           <Button
             onClick={() => setConfetti(!confetti)}
             className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg"
@@ -180,7 +181,7 @@ export default function RevealScreen({ gender, predictions }: RevealScreenProps)
           >
             Reiniciar
           </Button>
-        </div>
+        </div> */}
       </Card>
     </div>
   )

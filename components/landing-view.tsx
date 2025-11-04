@@ -24,7 +24,7 @@ export default function LandingView({ onNavigate }: LandingViewProps) {
         {/* Header */}
         <div className="text-center mb-4">
           <h1 className="text-6xl sm:text-7xl font-black mb-6 leading-tight">
-            <span className="text-[#c7e7e6]">¿Niño</span> <span className="text-gray-500">o</span> <span className="text-[#f9c8b9]">Niña?</span>
+            <span className="text-[#c7e7e6] contorno-blanco">¿Niño</span> <span className="text-gray-500">o</span> <span className="text-[#f9c8b9] contorno-blanco">Niña?</span>
           </h1>
           <p className="text-2xl text-gray-500 font-semibold mb-2">Revelación de Género del Bebé</p>
           {/* <p className="text-lg text-gray-600">¡Ayuda a descubrir el sexo del bebé con tus predicciones!</p> */}

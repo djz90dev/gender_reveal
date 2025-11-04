@@ -192,3 +192,16 @@
   min-height: 100vh;
   width: 100%;
 }
+
+.contorno-blanco {
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+
+.nombre {
+  font-family: 'Great Vibes', cursive;
+}
