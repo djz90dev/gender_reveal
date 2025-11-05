@@ -56,7 +56,7 @@ export default function ResultsView({ predictions, onBack, onReveal, revealed }:
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-12">
           {/* Boy card */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-[#c7e7e6] hover:shadow-xl transition-shadow">
             <div className="flex flex-col md:flex-row items-center gap-6">

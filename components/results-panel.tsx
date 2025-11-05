@@ -31,8 +31,8 @@ export default function ResultsPanel({ predictions, onReveal, revealed }: Result
   }, [predictions])
 
   const chartData = [
-    { name: "👦 Niños", value: stats.boyCount, fill: "#3b82f6" },
-    { name: "👧 Niñas", value: stats.girlCount, fill: "#ec4899" },
+    { name: "👦 Niños", value: stats.boyCount, fill: "#84b6f4" },
+    { name: "👧 Niñas", value: stats.girlCount, fill: "#fdcae1" },
   ]
 
   return (
@@ -75,8 +75,8 @@ export default function ResultsPanel({ predictions, onReveal, revealed }: Result
                   key={pred.id}
                   className={`p-5 rounded-2xl border-l-4 transition-all hover:shadow-lg ${
                     pred.prediction === "boy"
-                      ? "bg-gradient-to-r from-blue-50 to-blue-100 border-l-blue-500"
-                      : "bg-gradient-to-r from-pink-50 to-pink-100 border-l-pink-500"
+                    ? "bg-[#bbd5f9] border-l-[#84b6f4]"
+                    : "bg-[#fff0f6] border-l-[#fdcae1]"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">

@@ -44,13 +44,13 @@ export default function PredictionForm({ onSubmit }: PredictionFormProps) {
 
         <div>
           <label className="block text-sm font-bold text-gray-500 mb-4 uppercase tracking-wider">¿Niño o niña?</label>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-10">
             <button
               type="button"
               onClick={() => setPrediction("boy")}
               className={`py-4 px-4 rounded-2xl font-bold transition-all transform ${
                 prediction === "boy"
-                  ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-xl scale-105 ring-4 ring-blue-300"
+                  ? "bg-[#84b6f4] text-white shadow-xl scale-105 ring-4 ring-[#84b6f4]"
                   : "bg-blue-100 text-blue-700 hover:bg-blue-200 shadow-md hover:shadow-lg"
               }`}
             >
@@ -62,7 +62,7 @@ export default function PredictionForm({ onSubmit }: PredictionFormProps) {
               onClick={() => setPrediction("girl")}
               className={`py-4 px-4 rounded-2xl font-bold transition-all transform ${
                 prediction === "girl"
-                  ? "bg-gradient-to-br from-pink-500 to-pink-600 text-white shadow-xl scale-105 ring-4 ring-pink-300"
+                  ? "bg-[#fdcae1] text-white shadow-xl scale-105 ring-4 ring-[#fdcae1]"
                   : "bg-pink-100 text-pink-700 hover:bg-pink-200 shadow-md hover:shadow-lg"
               }`}
             >

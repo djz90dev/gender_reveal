@@ -34,7 +34,7 @@ export default function VoteView({ onBack, onAddPrediction }: VoteViewProps) {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black bg-gradient-to-r from-blue-600 to-pink-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-black text-gray-500  mb-4">
             Haz tu Predicción
           </h1>
           <p className="text-gray-500 text-xl font-semibold">¿Crees que será niño o niña?</p>

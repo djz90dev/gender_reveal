@@ -31,7 +31,7 @@ export default function LandingView({ onNavigate }: LandingViewProps) {
         </div>
 
         {/* Split design with footprints */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-12 overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-2 mb-12 overflow-hidden">
           {/* Boy side */}
           <div
             className="flex flex-col items-center justify-center min-h-60 cursor-pointer transition-all group"
@@ -49,8 +49,8 @@ export default function LandingView({ onNavigate }: LandingViewProps) {
             </div>
             {/* <h2 className="text-4xl font-black text-blue-700 mb-4">AGREGAR PREDICCIÓN</h2> */}
             {/* <p className="text-blue-600 text-lg mb-8 text-center">Comparte tu predicción y déjanos tu mensaje</p> */}
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-10 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all">
-              AGREGAR PREDICCIÓN
+            <Button className="bg-[#84b6f4] text-white font-bold py-3 px-10 rounded-xl text-xs md:text-lg shadow-lg hover:shadow-xl transition-all">
+              VOTAR
             </Button>
           </div>
 
@@ -71,8 +71,8 @@ export default function LandingView({ onNavigate }: LandingViewProps) {
             </div>
             {/* <h2 className="text-4xl font-black text-pink-700 mb-4">VER RESULTADOS</h2> */}
             {/* <p className="text-pink-600 text-lg mb-8 text-center">Observa votos, porcentajes y mensajes en vivo</p> */}
-            <Button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-10 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all">
-              VER RESULTADOS
+            <Button className="bg-[#fdcae1] text-white font-bold py-3 px-4 rounded-xl text-xs md:text-lg shadow-lg hover:shadow-xl transition-all">
+              RESULTADOS
             </Button>
           </div>
         </div>
