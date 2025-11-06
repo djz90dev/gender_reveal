@@ -53,7 +53,7 @@ export default function ResultsView({
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black text-gray-500 mb-4">Resultados de las Predicciones</h1>
+          <h1 className="text-4xl font-black text-gray-500 mb-4">Resultados de las Predicciones:</h1>
         </div>
 
         <ResultsPanel
