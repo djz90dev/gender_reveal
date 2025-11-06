@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts"
+import Image from "next/image"
 
 interface Prediction {
   id: string
@@ -17,54 +18,82 @@ interface ResultsPanelProps {
   predictions: Prediction[]
   onReveal: (gender: "boy" | "girl") => void
   revealed: boolean
+  isAdmin: boolean
 }
 
-export default function ResultsPanel({ predictions, onReveal, revealed }: ResultsPanelProps) {
+export default function ResultsPanel({ predictions, onReveal, revealed, isAdmin }: ResultsPanelProps) {
   const [showRevealModal, setShowRevealModal] = useState(false)
 
   const stats = useMemo(() => {
     const boyCount = predictions.filter((p) => p.prediction === "boy").length
     const girlCount = predictions.filter((p) => p.prediction === "girl").length
     const total = predictions.length
+    const boyPercentage = total > 0 ? Math.round((boyCount / total) * 100) : 0
+    const girlPercentage = total > 0 ? Math.round((girlCount / total) * 100) : 0
 
-    return { boyCount, girlCount, total }
+    return { boyCount, girlCount, total, boyPercentage, girlPercentage }
   }, [predictions])
 
-  const chartData = [
-    { name: "👦 Niños", value: stats.boyCount, fill: "#84b6f4" },
-    { name: "👧 Niñas", value: stats.girlCount, fill: "#fdcae1" },
-  ]
-
   return (
-    <div className="space-y-8">
-
+    <>
+      <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        {stats.total > 0 && (
-          <Card className="p-8 flex-1 bg-white shadow-lg border-0 rounded-2xl ">
-            <h3 className="text-2xl font-black text-gray-500 mb-8">Resumen de Predicciones</h3>
-            <ResponsiveContainer width="100%" height={350}>
-              <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="name" stroke="#6b7280" style={{ fontSize: "14px", fontWeight: "600" }} />
-                <YAxis stroke="#6b7280" />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#fff",
-                    border: "2px solid #e5e7eb",
-                    borderRadius: "12px",
-                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                  }}
-                  cursor={{ fill: "rgba(0, 0, 0, 0.05)" }}
+        {/* Boy card */}
+        <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-[#c7e7e6] hover:shadow-xl transition-shadow">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex-1">
+              <p className="text-sm font-bold text-blue-700 uppercase tracking-wider mb-3">Predicciones: Niño</p>
+              <div className="mb-6">
+                <div className="text-6xl font-black text-[#84b6f4] mb-2">{stats.boyCount}</div>
+                <div className="text-3xl font-bold text-[#84b6f4]">{stats.boyPercentage}%</div>
+              </div>
+              <div className="w-full h-4 bg-blue-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#84b6f4] transition-all duration-500 rounded-full"
+                  style={{ width: `${stats.boyPercentage}%` }}
                 />
-                <Bar dataKey="value" radius={[12, 12, 0, 0]} isAnimationActive>
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </Card>
-        )}
+              </div>
+            </div>
+            <div className="hidden sm:block flex-shrink-0">
+              <Image
+                src="/c_blue.webp"
+                alt="Niño"
+                width={200}
+                height={200}
+                className="w-40 h-40 drop-shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Girl card */}
+        <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-[#f9c8b9] hover:shadow-xl transition-shadow">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex-1">
+              <p className="text-sm font-bold text-pink-700 uppercase tracking-wider mb-3">Predicciones: Niña</p>
+              <div className="mb-6">
+                <div className="text-6xl font-black text-[#fdcae1] mb-2">{stats.girlCount}</div>
+                <div className="text-3xl font-bold text-[#fdcae1]">{stats.girlPercentage}%</div>
+              </div>
+              <div className="w-full h-4 bg-pink-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-[#fdcae1] transition-all duration-500 rounded-full"
+                  style={{ width: `${stats.girlPercentage}%` }}
+                />
+              </div>
+            </div>
+            <div className="hidden sm:block flex-shrink-0">
+              <Image
+                src="/c_pink.webp"
+                alt="Niña"
+                width={200}
+                height={200}
+                className="w-40 h-40 drop-shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
         {predictions.length > 0 && (
           <Card className="p-8 flex-1 bg-white shadow-lg border-0 rounded-2xl">
@@ -119,7 +148,8 @@ export default function ResultsPanel({ predictions, onReveal, revealed }: Result
         )}
       </div>
 
-      {!revealed && stats.total > 0 && (
+      <div className="mt-8">
+        {isAdmin && !revealed && stats.total > 0 && (
         <Button
           onClick={() => setShowRevealModal(true)}
           className="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 text-white font-black py-5 text-2xl rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
@@ -127,8 +157,8 @@ export default function ResultsPanel({ predictions, onReveal, revealed }: Result
           🎉 ¡REVELAR EL GÉNERO! 🎉
         </Button>
       )}
-
-      {showRevealModal && (
+      </div>
+ {showRevealModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <Card className="p-8 bg-white max-w-md w-full shadow-2xl border-0 rounded-3xl">
             <h2 className="text-3xl font-black text-gray-500 mb-2 text-center">¿Cuál es el género?</h2>
@@ -157,13 +187,13 @@ export default function ResultsPanel({ predictions, onReveal, revealed }: Result
         </div>
       )}
 
-      {stats.total === 0 && (
+ {stats.total === 0 && (
         <Card className="p-16 bg-gradient-to-br from-blue-50 to-pink-50 shadow-lg border-2 border-dashed border-gray-300 text-center rounded-2xl">
           <div className="text-6xl mb-4">📝</div>
           <p className="text-xl text-gray-500 font-bold">No hay predicciones aún</p>
           <p className="text-gray-600 mt-2">¡Ve a agregar predicciones para ver los resultados aquí!</p>
         </Card>
       )}
-    </div>
+    </>
   )
 }

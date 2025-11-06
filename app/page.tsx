@@ -11,7 +11,21 @@ import RevealScreen from "@/components/reveal-screen"
 export default function Page() {
   const { predictions, loading: predictionsLoading, addPrediction } = usePredictions()
   const { revealed, babyGender, loading: revealLoading, revealGender } = useRevealStatus()
+  const [isAdmin, setIsAdmin] = useState(false)
   const [currentView, setCurrentView] = useState<"landing" | "vote" | "results">("landing")
+
+  // Contraseña para activar el modo administrador. ¡Cámbiala por algo seguro!
+  const ADMIN_PASSWORD = "bebe";
+
+  const handleAdminLogin = () => {
+    const password = prompt("Introduce la contraseña de administrador:");
+    if (password === ADMIN_PASSWORD) {
+      setIsAdmin(true);
+      alert("Modo administrador activado.");
+    } else if (password) {
+      alert("Contraseña incorrecta.");
+    }
+  };
 
   if (predictionsLoading || revealLoading) {
     return (
@@ -42,6 +56,8 @@ export default function Page() {
       onBack={() => setCurrentView("landing")}
       onReveal={revealGender}
       revealed={revealed}
+      isAdmin={isAdmin}
+      onAdminLogin={handleAdminLogin}
     />
   )
 }
