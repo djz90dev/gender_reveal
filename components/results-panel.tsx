@@ -98,11 +98,11 @@ export default function ResultsPanel({ predictions, onReveal, revealed, isAdmin 
         {predictions.length > 0 && (
           <Card className="p-8 flex-1 bg-white shadow-lg border-0 rounded-2xl">
             <h3 className="text-2xl font-black text-gray-500 mb-8">Predicciones de Familiares</h3>
-            <div className="space-y-4 max-h-96 overflow-y-auto pr-3">
+            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-3 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {predictions.map((pred) => (
                 <div
                   key={pred.id}
-                  className={`p-5 rounded-2xl border-l-4 transition-all hover:shadow-lg ${
+                  className={`p-5 rounded-2xl border-l-4 transition-all mb-0 ${
                     pred.prediction === "boy"
                     ? "bg-[#bbd5f9] border-l-[#84b6f4]"
                     : "bg-[#fff0f6] border-l-[#fdcae1]"
