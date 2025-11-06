@@ -3,26 +3,27 @@
 import type React from "react"
 
 import { useState } from "react"
+import type { GenderPrediction } from "@/types" // Suponiendo que creas un archivo de tipos
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
 interface PredictionFormProps {
-  onSubmit: (name: string, prediction: "boy" | "girl", message: string) => void
+  onSubmit: (name: string, prediction: GenderPrediction, message: string) => Promise<void>;
+  isSubmitting: boolean;
 }
 
-export default function PredictionForm({ onSubmit }: PredictionFormProps) {
+export default function PredictionForm({ onSubmit, isSubmitting }: PredictionFormProps) {
   const [name, setName] = useState("")
-  const [prediction, setPrediction] = useState<"boy" | "girl">("boy")
+  const [prediction, setPrediction] = useState<GenderPrediction>("boy")
   const [message, setMessage] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log("[v0] Form submit - name:", name, "prediction:", prediction)
     if (name.trim()) {
-      onSubmit(name, prediction, message)
-      setName("")
-      setPrediction("boy")
-      setMessage("")
+      await onSubmit(name, prediction, message);
+      // Opcional: Resetear el formulario solo si el envío fue exitoso.
+      // El componente padre ahora controla el estado post-envío.
     }
   }
 
@@ -94,10 +95,10 @@ export default function PredictionForm({ onSubmit }: PredictionFormProps) {
 
         <Button
           type="submit"
-          disabled={!name.trim()}
+          disabled={!name.trim() || isSubmitting}
           className="w-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white font-bold py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          ✓ Enviar Predicción
+          {isSubmitting ? "Enviando..." : "✓ Enviar Predicción"}
         </Button>
       </form>
     </Card>

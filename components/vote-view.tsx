@@ -7,17 +7,29 @@ import Image from "next/image"
 
 interface VoteViewProps {
   onBack: () => void
-  onAddPrediction: (name: string, prediction: "boy" | "girl", message: string) => void
+  onAddPrediction: (data: { name: string; prediction: "boy" | "girl"; message: string }) => Promise<void>
 }
 
 export default function VoteView({ onBack, onAddPrediction }: VoteViewProps) {
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (name: string, prediction: "boy" | "girl", message: string) => {
+  const handleSubmit = async (name: string, prediction: "boy" | "girl", message: string) => {
     console.log("[v0] Vote view - handleSubmit llamado con:", { name, prediction, message })
-    onAddPrediction(name, prediction, message)
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 2500)
+    setIsSubmitting(true)
+    setError(null)
+    try {
+      await onAddPrediction({ name, prediction, message })
+      setSubmitted(true)
+      // El formulario se resetea en PredictionForm si el envío es exitoso
+    } catch (err) {
+      console.error("Error submitting prediction:", err)
+      setError("No se pudo enviar la predicción. Inténtalo de nuevo.")
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => setSubmitted(false), 3000)
+    }
   }
 
   return (
@@ -49,7 +61,13 @@ export default function VoteView({ onBack, onAddPrediction }: VoteViewProps) {
               </div>
             )}
 
-            <PredictionForm onSubmit={handleSubmit} />
+            {error && (
+              <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl">
+                <p className="text-center font-semibold">{error}</p>
+              </div>
+            )}
+
+            <PredictionForm onSubmit={handleSubmit} isSubmitting={isSubmitting} />
 
             
           </div>
