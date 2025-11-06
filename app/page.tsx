@@ -15,7 +15,7 @@ export default function Page() {
   const [currentView, setCurrentView] = useState<"landing" | "vote" | "results">("landing")
 
   // Contraseña para activar el modo administrador. ¡Cámbiala por algo seguro!
-  const ADMIN_PASSWORD = "bebe";
+  const ADMIN_PASSWORD = "bebedr";
 
   const handleAdminLogin = () => {
     const password = prompt("Introduce la contraseña de administrador:");

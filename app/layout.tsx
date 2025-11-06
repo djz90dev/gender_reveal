@@ -14,7 +14,7 @@ import './globals.css'
 // })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
+  title: 'Revelacion de Genero Flia. Zurita',
   description: 'Created with v0',
   generator: 'v0.app',
 }
