@@ -1,5 +1,6 @@
 "use client"
 
+import type { GenderPrediction } from "@/types"
 import { useState } from "react"
 import { usePredictions } from "@/lib/use-predictions" // <-- Cambio clave aquí
 import { useRevealStatus } from "@/hooks/use-reveal-status"
@@ -27,6 +28,15 @@ export default function Page() {
     }
   };
 
+  const handleAddPredictionAndNavigate = async (data: {
+    name: string
+    prediction: GenderPrediction
+    message: string
+  }) => {
+    await addPrediction(data) // Guarda la predicción en Firebase
+    setCurrentView("results") // Cambia a la vista de resultados
+  }
+
   if (predictionsLoading || revealLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-100 to-blue-100">
@@ -47,7 +57,9 @@ export default function Page() {
   }
 
   if (currentView === "vote") {
-    return <VoteView onBack={() => setCurrentView("landing")} onAddPrediction={addPrediction} />
+    return (
+      <VoteView onBack={() => setCurrentView("landing")} onAddPrediction={handleAddPredictionAndNavigate} />
+    )
   }
 
   return (
