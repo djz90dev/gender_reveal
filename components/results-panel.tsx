@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useMemo } from "react"
+import Slider from "react-slick"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts"
 import Image from "next/image"
 
 interface Prediction {
@@ -33,6 +33,32 @@ export default function ResultsPanel({ predictions, onReveal, revealed, isAdmin 
 
     return { boyCount, girlCount, total, boyPercentage, girlPercentage }
   }, [predictions])
+
+  const sliderSettings = {
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 5000, // 6 segundos
+    infinite: predictions.length > 3,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1, // Mover de 2 en 2
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
 
   return (
     <>
@@ -98,51 +124,57 @@ export default function ResultsPanel({ predictions, onReveal, revealed, isAdmin 
         {predictions.length > 0 && (
           <Card className="p-8 flex-1 bg-white shadow-lg border-0 rounded-2xl">
             <h3 className="text-2xl font-black text-gray-500 mb-8">Predicciones de Familiares</h3>
-            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-3 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="relative">
+              <Slider {...sliderSettings}>
               {predictions.map((pred) => (
                 <div
                   key={pred.id}
-                  className={`p-5 rounded-2xl border-l-4 transition-all mb-0 ${
-                    pred.prediction === "boy"
-                    ? "bg-[#bbd5f9] border-l-[#84b6f4]"
-                    : "bg-[#fff0f6] border-l-[#fdcae1]"
-                  }`}
+                  className="px-2 h-[260px]" // Padding for spacing between slides
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <p className="font-black text-gray-500 text-lg">{pred.name}</p>
-                        <span className="text-2xl">{pred.prediction === "boy" ? "👦" : "👧"}</span>
-                      </div>
-                      <p
-                        className={`text-sm font-bold uppercase tracking-wider mb-3 ${
-                          pred.prediction === "boy" ? "text-blue-700" : "text-pink-700"
-                        }`}
-                      >
-                        Predice: {pred.prediction === "boy" ? "NIÑO" : "NIÑA"}
-                      </p>
-                      {pred.message && (
-                        <div className="bg-white rounded-lg px-4 py-3 mb-2 border-l-2 border-yellow-400">
-                          <p className="text-sm text-gray-500 italic">
-                            💬 {'"'}
-                            {pred.message}
-                            {'"'}
-                          </p>
+                  <div
+                    className={`p-5 rounded-2xl border-l-4 transition-all h-full flex flex-col justify-between ${
+                      pred.prediction === "boy"
+                        ? "bg-[#bbd5f9] border-l-[#84b6f4]"
+                        : "bg-[#fff0f6] border-l-[#fdcae1]"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <p className="font-black text-gray-500 text-lg">{pred.name}</p>
+                          <span className="text-2xl">{pred.prediction === "boy" ? "👦" : "👧"}</span>
                         </div>
+                        <p
+                          className={`text-sm font-bold uppercase tracking-wider mb-3 ${
+                            pred.prediction === "boy" ? "text-blue-700" : "text-pink-700"
+                          }`}
+                        >
+                          Predice: {pred.prediction === "boy" ? "NIÑO" : "NIÑA"}
+                        </p>
+                        {pred.message && (
+                          <div className="bg-white rounded-lg px-4 py-3 mb-2 border-l-2 border-yellow-400">
+                            <p className="text-sm text-gray-500 italic">
+                              💬 {'"'}
+                              {pred.message}
+                              {'"'}
+                            </p>
+                          </div>
                       )}
-                      <p className="text-xs text-gray-600 font-medium">
-                        {new Date(pred.timestamp).toLocaleString("es-ES", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </p>
+                      <p className="text-xs text-gray-600 font-medium pt-2">
+                          {new Date(pred.timestamp).toLocaleString("es-ES", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
+              </Slider>
             </div>
           </Card>
         )}
